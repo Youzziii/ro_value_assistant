@@ -12390,7 +12390,6 @@ if (
         .setDivider(true)
         .setSpacing(SeparatorSpacingSize.Small);
 
-      const ticketGif =
         new AttachmentBuilder(RULES_GIF_PATH).setName(
           "vanta_central_main.gif"
         );
@@ -12497,7 +12496,6 @@ if (
      // CLAIM/CLOSE OUTSIDE FIRST CONTAINER
 const claimMessage = await ticketChannel.send({
   components: [claimCloseButtons],
-});
 
       // ========================================================
       // CHECKLIST
