@@ -12382,7 +12382,7 @@ if (
         },
       });
 
-      // ========================================================
+// ========================================================
       // MIDDLEMAN REQUEST CONTAINER
       // ========================================================
 
@@ -12390,9 +12390,15 @@ if (
         .setDivider(true)
         .setSpacing(SeparatorSpacingSize.Small);
 
-        new AttachmentBuilder(RULES_GIF_PATH).setName(
-          "vanta_central_main.gif"
-        );
+      // 1. BEIDE ATTACHMENTS DEFINIËREN
+      const ticketGif = new AttachmentBuilder(RULES_GIF_PATH).setName(
+        "vanta_central_main.gif"
+      );
+
+      // Zorg dat het pad THUMBNAIL_GIF_PATH of het juiste bestandspad hier klopt
+      const thumbnailAttachment = new AttachmentBuilder(RULES_GIF_PATH).setName(
+        "vanta_central_thumbnail.gif"
+      );
 
       const ticketTitle = new SectionBuilder()
         .addTextDisplayComponents(
@@ -12485,17 +12491,18 @@ if (
             )
           );
 
-      // FIRST CONTAINER
+      // FIRST CONTAINER (Met beide bestanden in ééne files array)
       const ticketMessage =
         await ticketChannel.send({
           components: [ticketContainer],
-          files: [ticketGif],
+          files: [ticketGif, thumbnailAttachment],
           flags: MessageFlags.IsComponentsV2,
         });
 
-     // CLAIM/CLOSE OUTSIDE FIRST CONTAINER
-const claimMessage = await ticketChannel.send({
-  components: [claimCloseButtons],
+      // CLAIM/CLOSE OUTSIDE FIRST CONTAINER
+      const claimMessage = await ticketChannel.send({
+        components: [claimCloseButtons],
+      });
 
       // ========================================================
       // CHECKLIST
